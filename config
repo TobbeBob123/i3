@@ -1,0 +1,355 @@
+### Workspace instillinger ###
+#Endre WS navn
+set $ws1 "1"
+set $ws2 "2 Term"
+set $ws3 "3 Signal"
+set $ws4 "4 Thunar"
+set $ws5 "5 Nett"
+set $ws6 "6 Discord"
+set $ws7 "7 Teams"
+set $ws8 "8 Lyd"
+set $ws9 "9 Nett-Ins"
+set $ws10 "10"
+
+#Roller
+assign [class="Alacritty"] 2 Term
+assign [class="kitty"] 2 Term
+assign [title="Signal"] 3 Signal
+assign [class="Thunar"] 4 Thunar
+assign [class="Vivaldi-stable"] 5 Nett
+assign [class="Brave-browser"] 5 Nett
+assign [class="firefox"] 5 Nett
+assign [class="librewolf"] 5 Nett
+assign [class="discord"] 6 Discord
+assign [class="teams-for-linux"] 7 Teams
+assign [class="Pavucontrol"] 8 Lyd
+assign [class="Nm-connection-editor"] 9 Nett-Ins
+assign [class="lunarclient"] 10
+assign [class="Steam"] 10
+assign [class="Emacs"] 10
+assign [class="code-oss"] 10
+assign [class="libreoffice"] 10
+
+#### Font ####
+font pango:Cousine Nerd Font Mono 9
+
+### Autostart ###
+
+# Hvilemodus.
+exec --no-startup-id xautolock -time 5 -locker "systemctl suspend"; 
+
+# NetworkManager.
+exec --no-startup-id nm-applet;
+
+
+#Start bruk av master-stack layout
+exec /home/tobias/script/master-stack.sh
+
+# autostart programmer
+exec i3-msg 'workspace 2 Term; exec kitty;'
+exec i3-msg exec thunar;
+exec i3-msg  exec signal-desktop;
+#exec i3-msg exec vivaldi-stable;
+exec i3-msg exec discord-canary
+exec i3-msg exec teams-for-linux
+exec i3-msg exec librewolf
+exec i3-msg exec pavucontrol
+exec i3-msg exec nm-connection-editor
+
+### Hotkeys ###
+# Lydkontroll
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+# Lysstryke
+#bindsym XF86MonBrightnessUp exec xbacklight -5 && xbacklight > /home/tobias/.config/Lysstyrke/config && $refresh_i3status
+#bindsym XF86MonBrighnessDown exec xbacklight -5 && xbacklight > /home/tobias/.config/Lysstyrke/config && $refresh_i3status
+
+# Sett superkey
+set $mod Mod4
+
+# Mouse+$mod to dra/flytt floating windows 
+floating_modifier $mod
+
+#Border
+new_window pixel 0
+new_float pixel 0
+
+#Gaps
+#gaps outer 3
+#gaps inner 7
+
+# start terminal
+bindsym $mod+Return exec kitty
+
+#Start nett
+bindsym $mod+Shift+Tab exec librewolf
+
+#Start Thunar
+bindsym $mod+Shift+f exec thunar
+
+#Start Minecraft
+bindsym $mod+m exec lunarclient
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+#Start Teams
+bindsym $mod+Tab exec teams-for-linux
+
+#Start Discord
+bindsym $mod+Shift+d exec discord-canary
+
+#Start Signal
+bindsym $mods+s exec signal-desktop
+
+# start Rofi (a program launcher)
+bindsym $mod+d exec --no-startup-id "rofi -show run"
+
+#løs pc(Betterlockscreen)
+bindsym $mod+l exec betterlockscreen -l
+
+#Start emacs
+bindsym $mod+e exec emacs
+
+#start code
+bindsym $mod+o exec code
+
+#Start steam
+bindsym $mod+Shift+o exec steam
+
+#Start pavucontrol
+bindsym $mod+Shift+l exec pavucontrol
+
+#Start Coreshot (Screenshot program)
+bindsym $mod+p exec coreshot
+
+#Start Script for å få flere skjermer (Levono Dockingstasjon)
+bindsym $mod+x exec /home/tobias/script/flereskjerm.sh
+
+#Start Scrpt for å få en skjerm (Bare Laptop)
+bindsym $mod+z exec /home/tobias/script/LaptopBare.sh
+
+### Vindu behandler ###
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+n focus up
+bindsym $mod+oslash focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+n move up
+bindsym $mod+Shift+oslash move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+
+# change container layout
+bindsym $mod+Shift+s layout default
+bindsym $mod+w layout tabbed
+bindsym $mod+c layout toggle split
+bindsym $mod+Shift+v layout toggle
+bindsym $mod+f nop swap master
+bindsym $mod+Shift+m nop go master
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+### I3 restart, reload og exit ###
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec i3-msg exit
+
+### Moduser ###
+# resize
+mode "resize" {
+# These bindings trigger as soon as you enter the resize mode
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym d resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+### i3bar ###
+bar {
+       output primary
+       status_command i3status
+       position top
+       font pango:Cousine Nerd Font Mono 9
+       workspace_buttons yes
+       tray_output primary
+       tray_padding 1
+       colors {
+		background #1d1f21
+		focused_workspace #1d1f21 #1d1f21 #FFFFFF
+		urgent_workspace #FFFFFF #1d1f21 #808080	
+       }
+}
+
+bar {
+       output DP-1
+       status_command i3status
+       position top
+       font pango:Cousine Nerd Font Mono 8
+       workspace_buttons yes
+       tray_output DP-1 
+       tray_padding 1
+       colors {
+		background #1d1f21
+		focused_workspace #1d1f21 #1d1f21 #FFFFFF
+		urgent_workspace #FFFFFF #1d1f21 #808080
+       }
+}
+
+bar {
+       output DP-2
+       status_command i3status
+       position top
+       font pango:Cousine Nerd Font Mono 8
+       workspace_buttons yes
+       tray_output DP-1 
+       tray_output DP-2 
+       tray_padding 1
+       colors {
+ 		background #1d1f21
+		focused_workspace #1d1f21 #1d1f21 #FFFFFF
+		urgent_workspace #FFFFFF #1d1f21 #808080
+       }
+}
+
+bar {
+       output HDMI-1
+       status_command i3status
+       position top
+       font pango:Cousine Nerd Font Mono 8
+       workspace_buttons yes
+       tray_output DP-1 
+       tray_output HDMI-1
+       tray_padding 1
+       colors {
+      		background #1d1f21
+		focused_workspace #1d1f21 #1d1f21 #FFFFFF
+		urgent_workspace #FFFFFF #1d1f21 #808080
+       }
+}
+
+bar {
+       output HDMI-2
+       status_command i3status
+       position top
+       font pango:Cousine Nerd Font Mono 8
+       workspace_buttons yes
+       tray_output DP-1 
+       tray_output HDMI-2
+       tray_padding 1
+       colors {
+            	background #1d1f21
+		focused_workspace #1d1f21 #1d1f21 #FFFFFF
+		urgent_workspace #FFFFFF #1d1f21 #808080
+       }
+}
+
+bar {
+       output DVI-I-2-2
+       status_command i3status
+       position top
+       font pango:Cousine Nerd Font Mono 8
+       workspace_buttons yes
+       tray_output DVI-2-2 
+       tray_padding 1
+       colors {
+		background #1d1f21
+		focused_workspace #1d1f21 #1d1f21 #FFFFFF
+		urgent_workspace #FFFFFF #1d1f21 #808080
+       }
+}
+
+bar {
+       output flere
+       status_command i3status
+       position top
+       font pango:Cousine Nerd Font Mono 8
+       workspace_buttons yes
+       tray_output flere
+       tray_padding 1
+       colors {
+		background #1d1f21
+		focused_workspace #1d1f21 #1d1f21 #FFFFFF
+		urgent_workspace #FFFFFF #1d1f21 #808080
+       }
+}
+
+
+
+### Dunst ###
+for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px 
+no_focus [class="plasmashell" window_type="notification"] 
+
