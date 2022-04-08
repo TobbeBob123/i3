@@ -41,11 +41,14 @@ exec --no-startup-id xautolock -time 5 -locker "systemctl suspend";
 # NetworkManager.
 exec --no-startup-id nm-applet;
 
-
 #Start bruk av master-stack layout
 exec /home/tobias/script/master-stack.sh
 
 # autostart programmer
+exec ~/.fehbg
+exec "picom -f"
+exec dunst
+exec lxsession
 exec i3-msg 'workspace 2 Term; exec kitty;'
 exec i3-msg exec thunar;
 exec i3-msg  exec signal-desktop;
@@ -170,6 +173,7 @@ bindsym $mod+v split v
 bindsym $mod+Shift+s layout default
 bindsym $mod+w layout tabbed
 bindsym $mod+c layout toggle split
+bindsym $mod+b exec /home/tobias/script/master-stack.sh
 bindsym $mod+Shift+v layout toggle
 bindsym $mod+f nop swap master
 bindsym $mod+Shift+m nop go master
@@ -258,7 +262,7 @@ bar {
        output DP-1
        status_command i3status
        position top
-       font pango:Cousine Nerd Font Mono 8
+       font pango:Cousine Nerd Font Mono 9
        workspace_buttons yes
        tray_output DP-1 
        tray_padding 1
@@ -273,9 +277,8 @@ bar {
        output DP-2
        status_command i3status
        position top
-       font pango:Cousine Nerd Font Mono 8
+       font pango:Cousine Nerd Font Mono 9
        workspace_buttons yes
-       tray_output DP-1 
        tray_output DP-2 
        tray_padding 1
        colors {
@@ -289,10 +292,9 @@ bar {
        output HDMI-1
        status_command i3status
        position top
-       font pango:Cousine Nerd Font Mono 8
+       font pango:Cousine Nerd Font Mono 9
        workspace_buttons yes
-       tray_output DP-1 
-       tray_output HDMI-1
+       tray_output HDMI-1 
        tray_padding 1
        colors {
       		background #1d1f21
@@ -305,9 +307,8 @@ bar {
        output HDMI-2
        status_command i3status
        position top
-       font pango:Cousine Nerd Font Mono 8
+       font pango:Cousine Nerd Font Mono 9
        workspace_buttons yes
-       tray_output DP-1 
        tray_output HDMI-2
        tray_padding 1
        colors {
@@ -321,7 +322,7 @@ bar {
        output DVI-I-2-2
        status_command i3status
        position top
-       font pango:Cousine Nerd Font Mono 8
+       font pango:Cousine Nerd Font Mono 9
        workspace_buttons yes
        tray_output DVI-2-2 
        tray_padding 1
@@ -336,7 +337,7 @@ bar {
        output flere
        status_command i3status
        position top
-       font pango:Cousine Nerd Font Mono 8
+       font pango:Cousine Nerd Font Mono 9
        workspace_buttons yes
        tray_output flere
        tray_padding 1
