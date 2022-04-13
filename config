@@ -2,33 +2,33 @@
 #Endre WS navn
 set $ws1 "1"
 set $ws2 "2 Term"
-set $ws3 "3 Signal"
-set $ws4 "4 Thunar"
+set $ws3 "3 Sos"
+set $ws4 "4 Fils"
 set $ws5 "5 Nett"
-set $ws6 "6 Discord"
-set $ws7 "7 Teams"
-set $ws8 "8 Lyd"
-set $ws9 "9 Nett-Ins"
+set $ws6 "6 Jobb"
+set $ws7 "7 Lyd"
+set $ws8 "8 Nett-Ins"
+set $ws9 "9"
 set $ws10 "10"
 
 #Roller
 assign [class="Alacritty"] 2 Term
 assign [class="kitty"] 2 Term
-assign [title="Signal"] 3 Signal
-assign [class="Thunar"] 4 Thunar
+assign [title="Signal"] 3 Sos
+assign [class="discord"] 3 Sos
+assign [class="Thunar"] 4 Fils
 assign [class="Vivaldi-stable"] 5 Nett
 assign [class="Brave-browser"] 5 Nett
 assign [class="firefox"] 5 Nett
 assign [class="librewolf"] 5 Nett
-assign [class="discord"] 6 Discord
-assign [class="teams-for-linux"] 7 Teams
-assign [class="Pavucontrol"] 8 Lyd
-assign [class="Nm-connection-editor"] 9 Nett-Ins
-assign [class="lunarclient"] 10
-assign [class="Steam"] 10
-assign [class="Emacs"] 10
-assign [class="code-oss"] 10
-assign [class="libreoffice"] 10
+assign [class="teams-for-linux"] 6 Jobb
+assign [class="Pavucontrol"] 7 Lyd
+assign [class="Nm-connection-editor"] 8 Nett-Ins
+assign [class="lunarclient"] 9
+assign [class="Steam"] 9
+assign [class="Emacs"] 9
+assign [class="code-oss"] 9
+assign [class="libreoffice"] 9
 
 #### Font ####
 font pango:Cousine Nerd Font Mono 9
@@ -50,12 +50,8 @@ exec "picom -f"
 exec dunst
 exec lxsession
 exec i3-msg 'workspace 2 Term; exec kitty;'
-exec i3-msg exec thunar;
 exec i3-msg  exec signal-desktop;
-#exec i3-msg exec vivaldi-stable;
-exec i3-msg exec discord-canary
 exec i3-msg exec teams-for-linux
-exec i3-msg exec librewolf
 exec i3-msg exec pavucontrol
 exec i3-msg exec nm-connection-editor
 
@@ -68,8 +64,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
 # Lysstryke
-#bindsym XF86MonBrightnessUp exec xbacklight -5 && xbacklight > /home/tobias/.config/Lysstyrke/config && $refresh_i3status
-#bindsym XF86MonBrighnessDown exec xbacklight -5 && xbacklight > /home/tobias/.config/Lysstyrke/config && $refresh_i3status
+bindsym XF86MonBrightnessUp exec "lux -a 5%"
+bindsym XF86MonBrighnessDown exec "lux -s 5%"
 
 # Sett superkey
 set $mod Mod4
@@ -109,11 +105,11 @@ bindsym $mod+Shift+d exec discord-canary
 #Start Signal
 bindsym $mods+s exec signal-desktop
 
-# start Rofi (a program launcher)
-bindsym $mod+d exec --no-startup-id "rofi -show run"
+# start program launcher
+bindsym $mod+d exec --no-startup-id "dmenu_run -nb '#282a36' -sf '#8be9fd' -sb '#282a3    6' -nf '#ff79c6'"
 
 #løs pc(Betterlockscreen)
-bindsym $mod+l exec betterlockscreen -l
+bindsym $mod+l exec "systemctl suspend"
 
 #Start emacs
 bindsym $mod+e exec emacs
