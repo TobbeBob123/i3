@@ -63,10 +63,6 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# Lysstryke
-bindsym XF86MonBrightnessUp exec "lux -a 5%"
-bindsym XF86MonBrighnessDown exec "lux -s 5%"
-
 # Sett superkey
 set $mod Mod4
 
@@ -106,7 +102,7 @@ bindsym $mod+Shift+d exec discord-canary
 bindsym $mods+s exec signal-desktop
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id "dmenu_run -nb '#282a36' -sf '#8be9fd' -sb '#282a3    6' -nf '#ff79c6'"
+bindsym $mod+d exec --no-startup-id "dmenu_run"
 
 #løs pc(Betterlockscreen)
 bindsym $mod+l exec "systemctl suspend"
@@ -343,10 +339,3 @@ bar {
 		urgent_workspace #FFFFFF #1d1f21 #808080
        }
 }
-
-
-
-### Dunst ###
-for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px 
-no_focus [class="plasmashell" window_type="notification"] 
-
